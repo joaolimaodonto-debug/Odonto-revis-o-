@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Odonto Revisão</title>
+<style>
+:root{
+  --bg:#f1f5f6;--surface:#fff;--ink:#142229;--muted:#66747b;
+  --line:#d9e2e5;--teal:#1f7a8c;--teal-dark:#12525e;
+  --good:#2f8f5b;--bad:#c1443a;--radius:18px;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Arial,Helvetica,sans-serif}
+button{font:inherit}
+.app{max-width:1050px;margin:auto;padding:20px}
+header{display:flex;justify-content:space-between;align-items:center;gap:15px;padding:18px 0}
+.logo{font-size:26px;font-weight:800;color:var(--teal-dark)}
+.logo span{display:block;font-size:12px;color:var(--muted);font-weight:500;margin-top:3px}
+.nav{display:flex;gap:8px;flex-wrap:wrap}
+.nav button{border:0;background:transparent;padding:10px 13px;border-radius:12px;cursor:pointer;color:var(--muted)}
+.nav button.active,.nav button:hover{background:#dfeff1;color:var(--teal-dark);font-weight:700}
+.hero{background:var(--teal-dark);color:white;border-radius:24px;padding:30px;margin:10px 0 24px}
+.hero h1{margin:0 0 10px;font-size:32px}
+.hero p{margin:0;max-width:700px;line-height:1.6;opacity:.9}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:15px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:20px;box-shadow:0 4px 18px rgba(20,34,41,.04)}
+.card h3{margin:0 0 8px}.card p{color:var(--muted);line-height:1.55}
+.btn{border:0;border-radius:12px;background:var(--teal);color:white;padding:11px 15px;cursor:pointer;font-weight:700}
+.btn.secondary{background:#e5f0f2;color:var(--teal-dark)}
+.section-title{margin:28px 0 14px}
+.hidden{display:none!important}
+.topic{cursor:pointer;transition:.15s}.topic:hover{transform:translateY(-2px)}
+.badge{display:inline-block;padding:5px 9px;border-radius:99px;background:#e5f0f2;color:var(--teal-dark);font-size:12px;font-weight:700}
+.flashcard{min-height:280px;display:flex;align-items:center;justify-content:center;text-align:center;cursor:pointer}
+.flash-inner{max-width:650px}.flash-q{font-size:28px;font-weight:800;line-height:1.3}.flash-a{font-size:20px;line-height:1.6;color:var(--muted)}
+.progress{height:8px;background:#dce5e7;border-radius:99px;overflow:hidden;margin:15px 0}
+.progress>div{height:100%;background:var(--teal);width:0}
+.option{display:block;width:100%;text-align:left;padding:14px;margin:9px 0;border:1px solid var(--line);background:white;border-radius:12px;cursor:pointer}
+.option:hover{border-color:var(--teal)}
+.option.correct{background:#e5f5eb;border-color:var(--good)}
+.option.wrong{background:#fbe9e7;border-color:var(--bad)}
+.small{font-size:13px;color:var(--muted)}
+footer{text-align:center;color:var(--muted);padding:35px 0 15px;font-size:13px}
+@media(max-width:650px){.app{padding:14px}.hero h1{font-size:27px}.flash-q{font-size:23px}}
+</style>
+</head>
+<body>
+<div class="app">
+<header>
+  <div class="logo">Odonto Revisão<span>Estude. Revise. Domine.</span></div>
+  <nav class="nav">
+    <button class="active" onclick="showPage('inicio',this)">Início</button>
+    <button onclick="showPage('resumos',this)">Resumos</button>
+    <button onclick="showPage('flashcards',this)">Flashcards</button>
+    <button onclick="showPage('quiz',this)">Quiz</button>
+  </nav>
+</header>
+
+<section id="inicio">
+  <div class="hero">
+    <h1>Seu espaço de revisão em Odontologia.</h1>
+    <p>Resumos rápidos, flashcards e questões para você revisar os assuntos mais importantes da graduação de forma simples e organizada.</p>
+  </div>
+  <h2 class="section-title">Comece sua revisão</h2>
+  <div class="grid">
+    <div class="card topic" onclick="showPage('resumos')"><span class="badge">Conteúdo</span><h3>Resumos</h3><p>Revise os principais pontos de cada disciplina sem perder tempo.</p><button class="btn">Ver resumos</button></div>
+    <div class="card topic" onclick="showPage('flashcards')"><span class="badge">Memorização</span><h3>Flashcards</h3><p>Teste sua memória e revise conceitos importantes.</p><button class="btn">Começar</button></div>
+    <div class="card topic" onclick="showPage('quiz')"><span class="badge">Questões</span><h3>Quiz</h3><p>Responda questões e acompanhe seu desempenho.</p><button class="btn">Fazer quiz</button></div>
+  </div>
+  <h2 class="section-title">Disciplinas</h2>
+  <div class="grid">
+    <div class="card"><h3>Endodontia</h3><p>Biologia pulpar, diagnóstico, instrumentação e obturação.</p></div>
+    <div class="card"><h3>Periodontia</h3><p>Doenças periodontais, diagnóstico, prevenção e tratamento.</p></div>
+    <div class="card"><h3>Farmacologia</h3><p>Anestésicos locais, analgésicos, anti-inflamatórios e antibióticos.</p></div>
+    <div class="card"><h3>Prótese</h3><p>Conceitos essenciais de prótese e reabilitação oral.</p></div>
+  </div>
+</section>
+
+<section id="resumos" class="hidden">
+  <h2 class="section-title">Resumos</h2>
+  <div class="grid">
+    <article class="card"><span class="badge">Endodontia</span><h3>Diagnóstico pulpar</h3><p><b>Pulpite reversível:</b> dor provocada, curta duração e ausência de dor espontânea persistente.</p><p><b>Pulpite irreversível:</b> dor espontânea ou provocada, geralmente intensa e prolongada.</p></article>
+    <article class="card"><span class="badge">Farmacologia</span><h3>Anestésicos locais</h3><p>Atuam bloqueando canais de sódio e impedindo a condução do potencial de ação nas fibras nervosas.</p></article>
+    <article class="card"><span class="badge">Periodontia</span><h3>Biofilme dental</h3><p>Comunidade microbiana organizada aderida à superfície dental. O controle mecânico do biofilme é fundamental para prevenção.</p></article>
+    <article class="card"><span class="badge">Prótese</span><h3>Oclusão</h3><p>O estudo das relações entre dentes, músculos e articulações ajuda no planejamento e na estabilidade das reabilitações.</p></article>
+  </div>
+  <p class="small">Os conteúdos acima são exemplos iniciais e podem ser substituídos pelos seus materiais de estudo.</p>
+</section>
+
+<section id="flashcards" class="hidden">
+  <h2 class="section-title">Flashcards</h2>
+  <p class="small">Toque no cartão para revelar a resposta.</p>
+  <div class="card flashcard" onclick="flipCard()">
+    <div class="flash-inner">
+      <div id="flashQ" class="flash-q"></div>
+      <div id="flashA" class="flash-a hidden"></div>
+    </div>
+  </div>
+  <div style="display:flex;justify-content:center;gap:10px;margin-top:15px">
+    <button class="btn secondary" onclick="prevCard()">Anterior</button>
+    <button class="btn" onclick="nextCard()">Próximo</button>
+  </div>
+  <p id="flashCount" class="small" style="text-align:center"></p>
+</section>
+
+<section id="quiz" class="hidden">
+  <h2 class="section-title">Quiz de Odontologia</h2>
+  <div class="card">
+    <div id="quizArea"></div>
+    <div class="progress"><div id="quizProgress"></div></div>
+    <button id="nextQuiz" class="btn hidden" onclick="nextQuiz()">Próxima questão</button>
+  </div>
+</section>
+
+<footer>Odonto Revisão • Projeto educacional independente</footer>
+</div>
+
+<script>
+const flashcards=[
+ {q:"Qual é o mecanismo básico dos anestésicos locais?",a:"Bloqueiam canais de sódio dependentes de voltagem, reduzindo a condução do potencial de ação."},
+ {q:"O que caracteriza a pulpite reversível?",a:"Dor provocada, de curta duração, que desaparece após a remoção do estímulo."},
+ {q:"Qual é uma medida fundamental para controle do biofilme dental?",a:"Remoção mecânica regular do biofilme por escovação e higiene interdental."},
+ {q:"O que é parestesia?",a:"Alteração da sensibilidade, como formigamento ou sensação de dormência."}
+];
+let fi=0;
+function renderFlash(){
+ document.getElementById('flashQ').textContent=flashcards[fi].q;
+ document.getElementById('flashA').textContent=flashcards[fi].a;
+ document.getElementById('flashA').classList.add('hidden');
+ document.getElementById('flashCount').textContent=`${fi+1} de ${flashcards.length}`;
+}
+function flipCard(){document.getElementById('flashA').classList.toggle('hidden')}
+function nextCard(){fi=(fi+1)%flashcards.length;renderFlash()}
+function prevCard(){fi=(fi-1+flashcards.length)%flashcards.length;renderFlash()}
+
+const questions=[
+ {q:"Qual estrutura é responsável principalmente pela condução do potencial de ação nervoso?",o:["Canais de sódio","Esmalte","Cemento","Ligamento periodontal"],a:0},
+ {q:"Na pulpite reversível, a dor normalmente:",o:["É espontânea e prolongada","É provocada e desaparece rapidamente","Nunca ocorre","É sempre noturna"],a:1},
+ {q:"O controle mecânico do biofilme é importante principalmente para:",o:["Aumentar o cálculo","Reduzir o acúmulo de biofilme","Escurecer o esmalte","Produzir anestesia"],a:1}
+];
+let qi=0,score=0,answered=false;
+function renderQuiz(){
+ answered=false;
+ const x=questions[qi];
+ document.getElementById('quizArea').innerHTML=`<p class="small">Questão ${qi+1} de ${questions.length}</p><h3>${x.q}</h3>`+
+ x.o.map((v,i)=>`<button class="option" onclick="answerQuiz(${i})">${v}</button>`).join('');
+ document.getElementById('quizProgress').style.width=((qi)/questions.length*100)+'%';
+ document.getElementById('nextQuiz').classList.add('hidden');
+}
+function answerQuiz(i){
+ if(answered)return; answered=true;
+ const buttons=document.querySelectorAll('.option');
+ buttons[questions[qi].a].classList.add('correct');
+ if(i!==questions[qi].a)buttons[i].classList.add('wrong'); else score++;
+ document.getElementById('nextQuiz').classList.remove('hidden');
+}
+function nextQuiz(){
+ qi++;
+ if(qi>=questions.length){
+   document.getElementById('quizArea').innerHTML=`<h3>Resultado</h3><p>Você acertou <b>${score} de ${questions.length}</b> questões.</p><button class="btn" onclick="restartQuiz()">Refazer quiz</button>`;
+   document.getElementById('quizProgress').style.width='100%';
+   document.getElementById('nextQuiz').classList.add('hidden');
+ }else renderQuiz();
+}
+function restartQuiz(){qi=0;score=0;renderQuiz()}
+function showPage(id,btn){
+ ['inicio','resumos','flashcards','quiz'].forEach(x=>document.getElementById(x).classList.add('hidden'));
+ document.getElementById(id).classList.remove('hidden');
+ document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('active'));
+ if(btn)btn.classList.add('active');
+ if(id==='flashcards')renderFlash();
+ if(id==='quiz')renderQuiz();
+ window.scrollTo({top:0,behavior:'smooth'});
+}
+renderFlash(); renderQuiz();
+</script>
+</body>
+</html>
